@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhushan Shinde - Senior Software Engineer</title>
+    <title>Bhushan Shinde — Senior Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --black: #000000;
+            --black-soft: #0a0a0a;
+            --black-card: #0f0f0f;
+            --black-elevated: #161616;
+            --black-border: #1f1f1f;
+            --gray-dark: #2a2a2a;
+            --gray-mid: #5a5a5a;
+            --gray-text: #8a8a8a;
+            --gray-light: #b0b0b0;
+            --white: #e8e8e8;
+            --white-bright: #f5f5f5;
+            --accent: #00e599;
+            --accent-dim: #00c47d;
+            --accent-glow: rgba(0, 229, 153, 0.15);
+            --accent-blue: #3b82f6;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'Outfit', sans-serif;
+        }
 
         * {
             margin: 0;
@@ -13,474 +34,861 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
-            line-height: 1.47059;
-            font-weight: 400;
-            letter-spacing: -0.022em;
-            color: #1d1d1f;
-            background: #fbfbfd;
-            -webkit-font-smoothing: antialiased;
+        html {
+            scroll-behavior: smooth;
         }
 
+        body {
+            font-family: var(--sans);
+            background: var(--black);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--black-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--mono);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--gray-mid);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gray-text);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ─── HERO ─── */
         .hero {
-            background: linear-gradient(135deg, #000000 0%, #1d1d1f 100%);
-            color: white;
-            text-align: center;
-            padding: 120px 20px 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            padding: 120px 40px 80px;
+            background: var(--black);
             overflow: hidden;
         }
 
-        .hero::before {
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            margin-bottom: 40px;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .hero-name {
+            font-size: clamp(52px, 8vw, 96px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            color: var(--white-bright);
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s 0.15s ease both;
+        }
+
+        .hero-title {
+            font-size: clamp(20px, 3vw, 32px);
+            font-weight: 300;
+            color: var(--gray-text);
+            letter-spacing: -0.01em;
+            margin-bottom: 48px;
+            animation: fadeUp 0.8s 0.3s ease both;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            animation: fadeUp 0.8s 0.45s ease both;
+        }
+
+        .hero-meta a, .hero-meta span {
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--gray-text);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-meta a:hover {
+            color: var(--accent);
+        }
+
+        .meta-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: inline-block;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── SECTIONS ─── */
+        .section {
+            padding: 100px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--white-bright);
+            margin-bottom: 60px;
+            line-height: 1.1;
+        }
+
+        /* ─── ABOUT ─── */
+        .about-text {
+            font-size: 20px;
+            line-height: 1.7;
+            color: var(--gray-light);
+            font-weight: 300;
+            max-width: 800px;
+            letter-spacing: -0.01em;
+        }
+
+        .about-text strong {
+            color: var(--white-bright);
+            font-weight: 500;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .stat-box {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .stat-box:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--gray-text);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ─── DIVIDER ─── */
+        .divider {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--black-border) 20%, var(--gray-dark) 50%, var(--black-border) 80%, transparent 100%);
+        }
+
+        /* ─── EXPERIENCE ─── */
+        .exp-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--black-border);
+            transition: all 0.3s;
+        }
+
+        .exp-item:last-child {
+            border-bottom: none;
+        }
+
+        .exp-item:hover {
+            padding-left: 12px;
+        }
+
+        .exp-date {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--gray-mid);
+            padding-top: 6px;
+        }
+
+        .exp-company {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent-dim);
+            margin-top: 4px;
+            font-family: var(--mono);
+        }
+
+        .exp-role {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white-bright);
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .exp-location {
+            font-size: 14px;
+            color: var(--gray-mid);
+            margin-bottom: 20px;
+        }
+
+        .exp-bullets {
+            list-style: none;
+        }
+
+        .exp-bullets li {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-light);
+            font-weight: 300;
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .exp-bullets li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        /* ─── SKILLS ─── */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .skill-category-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--gray-mid);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .skills-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-chip {
+            font-family: var(--mono);
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--gray-light);
+            padding: 10px 20px;
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-chip:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(0, 229, 153, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* ─── PROJECTS ─── */
+        .project-card {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 16px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s, transform 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .project-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
-        .hero-content {
-            max-width: 980px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+        .project-card:hover::before {
+            opacity: 1;
         }
 
-        .hero h1 {
-            font-size: 64px;
-            font-weight: 700;
-            letter-spacing: -0.015em;
-            margin-bottom: 8px;
-            line-height: 1.0625;
-        }
-
-        .hero .subtitle {
+        .project-name {
             font-size: 28px;
-            font-weight: 400;
-            color: #f5f5f7;
-            margin-bottom: 30px;
-            letter-spacing: 0.007em;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .contact-links a {
-            color: #2997ff;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 400;
-            transition: color 0.3s;
-        }
-
-        .contact-links a:hover {
-            color: #147ce5;
-        }
-
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 0 22px;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: -0.003em;
-            color: #1d1d1f;
-            margin-bottom: 12px;
-            line-height: 1.08349;
-        }
-
-        .section-header p {
-            font-size: 21px;
-            color: #86868b;
-            font-weight: 400;
-            letter-spacing: 0.011em;
-            line-height: 1.381;
-        }
-
-        .about-text {
-            font-size: 21px;
-            line-height: 1.381;
-            font-weight: 400;
-            letter-spacing: 0.011em;
-            color: #1d1d1f;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline-item {
-            margin-bottom: 48px;
-            padding: 32px;
-            background: white;
-            border-radius: 18px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .timeline-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .job-title {
-            font-size: 24px;
             font-weight: 600;
-            color: #1d1d1f;
-            letter-spacing: -0.009em;
-        }
-
-        .job-date {
-            font-size: 14px;
-            color: #86868b;
-            font-weight: 400;
-        }
-
-        .company {
-            font-size: 17px;
-            color: #6e6e73;
+            color: var(--white-bright);
+            letter-spacing: -0.02em;
             margin-bottom: 16px;
-            font-weight: 500;
         }
 
-        .timeline-item ul {
-            list-style: none;
-            margin-top: 16px;
-        }
-
-        .timeline-item li {
-            font-size: 17px;
-            line-height: 1.47059;
-            color: #1d1d1f;
-            margin-bottom: 12px;
-            padding-left: 24px;
-            position: relative;
-        }
-
-        .timeline-item li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 6px;
-            height: 6px;
-            background: #0071e3;
-            border-radius: 50%;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, #0071e3 0%, #005bb5 100%);
-            color: white;
-            padding: 48px 40px;
-            border-radius: 18px;
-            margin-bottom: 32px;
-            box-shadow: 0 4px 16px rgba(0,113,227,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,113,227,0.3);
-        }
-
-        .project-title {
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            letter-spacing: -0.005em;
-        }
-
-        .project-description {
-            font-size: 19px;
-            line-height: 1.42105;
-            margin-bottom: 24px;
-            color: #f5f5f7;
+        .project-desc {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--gray-light);
+            font-weight: 300;
+            margin-bottom: 28px;
+            max-width: 700px;
         }
 
         .project-link {
-            display: inline-block;
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--accent);
             text-decoration: none;
-            font-size: 17px;
-            font-weight: 400;
-            padding: 12px 24px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 980px;
-            transition: background 0.3s;
-        }
-
-        .project-link:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .education-card {
-            background: white;
-            padding: 32px;
-            border-radius: 18px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .education-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-
-        .education-card strong {
-            font-size: 21px;
-            color: #1d1d1f;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .education-card p {
-            font-size: 17px;
-            color: #6e6e73;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 16px;
-        }
-
-        .skill-tag {
-            background: white;
-            color: #1d1d1f;
-            padding: 16px 20px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 500;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 10px 24px;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
             transition: all 0.3s;
         }
 
-        .skill-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            background: #0071e3;
-            color: white;
+        .project-link:hover {
+            background: var(--accent);
+            color: var(--black);
         }
 
+        .project-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ─── EDUCATION ─── */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .edu-card {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .edu-card:hover {
+            border-color: var(--gray-dark);
+            transform: translateY(-3px);
+        }
+
+        .edu-degree {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--white-bright);
+            margin-bottom: 8px;
+        }
+
+        .edu-school {
+            font-size: 15px;
+            color: var(--gray-text);
+            font-weight: 400;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid var(--black-border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--gray-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copy {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--gray-mid);
+        }
+
+        /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
+            nav {
+                padding: 16px 20px;
             }
 
-            .hero .subtitle {
-                font-size: 21px;
+            .nav-links {
+                display: none;
             }
 
-            .section-header h2 {
-                font-size: 32px;
+            .section {
+                padding: 60px 20px;
             }
 
-            .timeline-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .hero {
+                padding: 100px 20px 60px;
             }
 
-            .skills-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            .hero-meta {
+                gap: 20px;
+            }
+
+            .exp-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .exp-item:hover {
+                padding-left: 0;
+            }
+
+            .project-card {
+                padding: 32px 24px;
+            }
+
+            .edu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .divider {
+                padding: 0 20px;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero {
-                padding: 80px 20px 60px;
-            }
+        /* ─── SCROLL ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
 
-            section {
-                padding: 60px 0;
-            }
-
-            .section-header {
-                margin-bottom: 40px;
-            }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="hero">
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">bhushan<span>.shinde</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow"></div>
         <div class="hero-content">
-            <h1>Bhushan Shinde</h1>
-            <p class="subtitle">Senior Software Engineer</p>
-            <div class="contact-links">
-                <a href="mailto:bhushan.bhagwat.shinde@gmail.com">bhushan.bhagwat.shinde@gmail.com</a>
-                <a href="#">Berlin, Germany</a>
+            <div class="hero-tag">Available for opportunities</div>
+            <h1 class="hero-name">Bhushan Shinde</h1>
+            <p class="hero-title">Senior Software Engineer — building <span class="highlight">scalable systems</span> that matter</p>
+            <div class="hero-meta">
+                <a href="mailto:bhushan.bhagwat.shinde@gmail.com"><span class="meta-dot"></span> bhushan.bhagwat.shinde@gmail.com</a>
+                <span><span class="meta-dot"></span> Berlin, Germany</span>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container">
-        <section>
-            <div class="section-header">
-                <h2>About</h2>
-            </div>
+    <!-- ABOUT -->
+    <div class="divider"><div class="divider-line"></div></div>
+    <section class="section" id="about">
+        <div class="reveal">
+            <div class="section-label">// About</div>
+            <h2 class="section-title">Engineering at scale.</h2>
             <p class="about-text">
-                I'm a Senior Software Engineer with over 10 years of experience building scalable software and leading impactful projects. I have worked extensively with technologies like Java, Kotlin, Go, Kafka, Docker, Kubernetes, Spring Boot, and AWS. I've worked on everything from optimizing workflows and refactoring core product models to implementing robust systems, contributing to the success of companies like HelloFresh, Frontdoor, and Hewlett-Packard. I'm passionate about designing efficient solutions, fostering collaboration, and delivering real business value through thoughtful engineering.
+                I'm a <strong>Senior Software Engineer</strong> with over a decade of experience architecting and delivering production systems that handle millions of operations. My expertise spans <strong>Go, Java, Kotlin, Kafka, Kubernetes</strong>, and <strong>AWS</strong> — from refactoring core product models to building high-throughput data pipelines. I've contributed to the success of companies like <strong>HelloFresh</strong>, <strong>Frontdoor</strong>, and <strong>Hewlett-Packard</strong>, and I'm driven by clean architecture, measurable impact, and collaborative engineering.
             </p>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <h2>Experience</h2>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="job-title">Senior Software Engineer</div>
-                    <div class="job-date">Jun 2022 — Present</div>
+            <div class="about-stats">
+                <div class="stat-box">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Exp</div>
                 </div>
-                <div class="company">HelloFresh, Berlin</div>
-                <ul>
-                    <li>Refactored the core Subscription model, a critical component of HelloFresh's product ecosystem, improving functionality, scalability, and long-term maintainability</li>
-                    <li>Designed and implemented a custom sinker, increasing event sinking throughput by 2.5x and successfully replacing the legacy Benthos system</li>
-                    <li>Led the development of data pipelines for customer behavior analysis, enabling cross-team data-driven decision-making and insights generation</li>
-                    <li>Spearheaded the development of a "Ultimate UnPause" feature variant projected to deliver €1.2M in customer value</li>
-                    <li>Directed the end-to-end redesign of the Holiday Shift feature, supporting ~40M deliveries across 35 markets while achieving performance under 50% of SLA thresholds</li>
-                    <li>Redesigned the HF Deliveries API by consolidating market-specific deployments into a single scalable architecture, improving flexibility and reducing response time by 70%</li>
+                <div class="stat-box">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">~40M</div>
+                    <div class="stat-label">Deliveries</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Latency Cut</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <div class="divider"><div class="divider-line"></div></div>
+    <section class="section" id="experience">
+        <div class="reveal">
+            <div class="section-label">// Experience</div>
+            <h2 class="section-title">Where I've shipped.</h2>
+        </div>
+
+        <div class="exp-item reveal">
+            <div>
+                <div class="exp-date">Jun 2022 — Present</div>
+                <div class="exp-company">HelloFresh</div>
+            </div>
+            <div>
+                <div class="exp-role">Senior Software Engineer</div>
+                <div class="exp-location">Berlin, Germany</div>
+                <ul class="exp-bullets">
+                    <li>Refactored the core Subscription model — a critical component of HelloFresh's product ecosystem — improving scalability and long-term maintainability</li>
+                    <li>Designed a custom sinker that increased event sinking throughput by 2.5x, replacing the legacy Benthos system</li>
+                    <li>Led development of data pipelines for customer behavior analysis, enabling cross-team data-driven decision-making</li>
+                    <li>Spearheaded the "Ultimate UnPause" feature variant projected to deliver €1.2M in customer value</li>
+                    <li>Directed end-to-end redesign of Holiday Shift, supporting ~40M deliveries across 35 markets under 50% of SLA thresholds</li>
+                    <li>Consolidated market-specific deployments into a single scalable Deliveries API, reducing response time by 70%</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="job-title">SDE-III</div>
-                    <div class="job-date">Apr 2020 — May 2022</div>
-                </div>
-                <div class="company">Frontdoor, Pune</div>
-                <ul>
-                    <li>Designed and implemented an OTP verification service for agents, supporting three channels: voice, SMS, and email</li>
-                    <li>Led a team of three developers in building and maintaining two microservices developed from the ground up</li>
-                    <li>Automated the item parts procedure, achieving over 90% efficiency improvement in the process</li>
-                    <li>Utilized a tech stack including Golang, AWS SNS/SQS, Redis, Kafka, MongoDB, gRPC, REST, and Protocol Buffers</li>
+        <div class="exp-item reveal">
+            <div>
+                <div class="exp-date">Apr 2020 — May 2022</div>
+                <div class="exp-company">Frontdoor</div>
+            </div>
+            <div>
+                <div class="exp-role">SDE-III</div>
+                <div class="exp-location">Pune, India</div>
+                <ul class="exp-bullets">
+                    <li>Designed and implemented an OTP verification service for agents across voice, SMS, and email channels</li>
+                    <li>Led a team of three developers building and maintaining two microservices from the ground up</li>
+                    <li>Automated the item parts procedure, achieving over 90% efficiency improvement</li>
+                    <li>Tech stack: Golang, AWS SNS/SQS, Redis, Kafka, MongoDB, gRPC, Protocol Buffers</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="job-title">Software Engineer</div>
-                    <div class="job-date">Jan 2018 — Mar 2020</div>
-                </div>
-                <div class="company">Hewlett-Packard, Pune</div>
-                <ul>
-                    <li>Integrated OAuth 2.0 for Single Sign-On (SSO) in DAAS using HPID, an internal authorization server</li>
-                    <li>Integrated Archetype and Swagger to establish a standardized framework for all future microservices</li>
-                    <li>Developed Trail, a library for tracking requests across heterogeneous microservices, improving debugging efficiency organization-wide</li>
-                    <li>Created Location-Helper, a microservice for retrieving addresses from GPS coordinates</li>
-                    <li>Led the initiative of migration of legacy code to a new microservice architecture</li>
+        <div class="exp-item reveal">
+            <div>
+                <div class="exp-date">Jan 2018 — Mar 2020</div>
+                <div class="exp-company">Hewlett-Packard</div>
+            </div>
+            <div>
+                <div class="exp-role">Software Engineer</div>
+                <div class="exp-location">Pune, India</div>
+                <ul class="exp-bullets">
+                    <li>Integrated OAuth 2.0 for Single Sign-On (SSO) in DAAS using HPID authorization server</li>
+                    <li>Established standardized microservice framework with Archetype and Swagger integration</li>
+                    <li>Developed Trail, a cross-service request tracking library that improved debugging efficiency org-wide</li>
+                    <li>Built Location-Helper, a microservice for GPS-to-address resolution</li>
+                    <li>Led migration of legacy code to a new microservice architecture</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="job-title">Software Engineer</div>
-                    <div class="job-date">Sept 2017 — Jan 2018</div>
-                </div>
-                <div class="company">MyPOS Technologies, Mumbai</div>
-                <ul>
-                    <li>Instrumental in designing/development of 2 tiers of GST filing for SuperTax, a GST solution that provides businesses with a seamless and efficient way to manage their GST returns</li>
+        <div class="exp-item reveal">
+            <div>
+                <div class="exp-date">Sep 2017 — Jan 2018</div>
+                <div class="exp-company">MyPOS Technologies</div>
+            </div>
+            <div>
+                <div class="exp-role">Software Engineer</div>
+                <div class="exp-location">Mumbai, India</div>
+                <ul class="exp-bullets">
+                    <li>Designed and developed 2 tiers of GST filing for SuperTax, providing businesses with seamless GST return management</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-header">
-                    <div class="job-title">Senior Product Engineer</div>
-                    <div class="job-date">Mar 2016 — Sept 2017</div>
-                </div>
-                <div class="company">Digii (Formerly Collpoll), Bengaluru</div>
-                <ul>
-                    <li>Initially contributed as a full-stack developer, gaining expertise across both front-end and back-end technologies</li>
-                    <li>Led a team of three developers to tailor the product to meet client-specific requirements</li>
-                    <li>Proposed and successfully implemented a "Service Request" feature, enhancing the product's functionality and user experience</li>
+        <div class="exp-item reveal">
+            <div>
+                <div class="exp-date">Mar 2016 — Sep 2017</div>
+                <div class="exp-company">Digii (Collpoll)</div>
+            </div>
+            <div>
+                <div class="exp-role">Senior Product Engineer</div>
+                <div class="exp-location">Bengaluru, India</div>
+                <ul class="exp-bullets">
+                    <li>Contributed as a full-stack developer, gaining deep expertise across frontend and backend</li>
+                    <li>Led a team of three to customize the product for client-specific requirements</li>
+                    <li>Proposed and shipped a "Service Request" feature, enhancing product functionality and UX</li>
                 </ul>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
-            <div class="section-header">
-                <h2>Projects</h2>
-            </div>
-            <div class="project-card">
-                <div class="project-title">NeatTabs - Smart Tab Grouping</div>
-                <p class="project-description">
-                    A Chrome extension that automatically organizes browser tabs by website into intelligent, collapsible groups. Published on the Chrome Web Store, NeatTabs helps users manage their browsing sessions more efficiently by grouping tabs based on their domain.
-                </p>
-                <a href="https://chromewebstore.google.com/detail/bnficoehkniakokhjapjoanlcbigmehb" target="_blank" class="project-link">View on Chrome Store</a>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <h2>Education</h2>
-            </div>
-            <div class="education-grid">
-                <div class="education-card">
-                    <strong>Master of Technology</strong>
-                    <p>VIT University, Vellore</p>
-                </div>
-                <div class="education-card">
-                    <strong>Bachelor of Engineering</strong>
-                    <p>University of Pune, Pune</p>
+    <!-- SKILLS -->
+    <div class="divider"><div class="divider-line"></div></div>
+    <section class="section" id="skills">
+        <div class="reveal">
+            <div class="section-label">// Skills</div>
+            <h2 class="section-title">What I work with.</h2>
+        </div>
+        <div class="skills-container reveal">
+            <div>
+                <div class="skill-category-label">Languages</div>
+                <div class="skills-row">
+                    <div class="skill-chip">Go</div>
+                    <div class="skill-chip">Java</div>
+                    <div class="skill-chip">Kotlin</div>
                 </div>
             </div>
-        </section>
+            <div>
+                <div class="skill-category-label">Streaming & Messaging</div>
+                <div class="skills-row">
+                    <div class="skill-chip">Kafka</div>
+                    <div class="skill-chip">KStreams</div>
+                    <div class="skill-chip">gRPC</div>
+                    <div class="skill-chip">Protocol Buffers</div>
+                </div>
+            </div>
+            <div>
+                <div class="skill-category-label">Infrastructure & Cloud</div>
+                <div class="skills-row">
+                    <div class="skill-chip">Docker</div>
+                    <div class="skill-chip">Kubernetes</div>
+                    <div class="skill-chip">AWS</div>
+                    <div class="skill-chip">CI/CD</div>
+                </div>
+            </div>
+            <div>
+                <div class="skill-category-label">Databases</div>
+                <div class="skills-row">
+                    <div class="skill-chip">PostgreSQL</div>
+                    <div class="skill-chip">MySQL</div>
+                    <div class="skill-chip">MongoDB</div>
+                    <div class="skill-chip">Redis</div>
+                </div>
+            </div>
+            <div>
+                <div class="skill-category-label">Practices & Architecture</div>
+                <div class="skills-row">
+                    <div class="skill-chip">Domain-Driven Design</div>
+                    <div class="skill-chip">Event Streaming</div>
+                    <div class="skill-chip">Microservices</div>
+                    <div class="skill-chip">Spring Boot</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section>
-            <div class="section-header">
-                <h2>Skills</h2>
+    <!-- PROJECTS -->
+    <div class="divider"><div class="divider-line"></div></div>
+    <section class="section" id="projects">
+        <div class="reveal">
+            <div class="section-label">// Projects</div>
+            <h2 class="section-title">Side quests.</h2>
+        </div>
+        <div class="project-card reveal">
+            <div class="project-name">NeatTabs — Smart Tab Grouping</div>
+            <p class="project-desc">
+                A Chrome extension that automatically organizes browser tabs by website into intelligent, collapsible groups. Published on the Chrome Web Store, NeatTabs helps users manage their browsing sessions by grouping tabs based on their domain.
+            </p>
+            <a href="https://chromewebstore.google.com/detail/bnficoehkniakokhjapjoanlcbigmehb" target="_blank" class="project-link">
+                View on Chrome Store
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <div class="divider"><div class="divider-line"></div></div>
+    <section class="section" id="education">
+        <div class="reveal">
+            <div class="section-label">// Education</div>
+            <h2 class="section-title">Foundation.</h2>
+        </div>
+        <div class="edu-grid reveal">
+            <div class="edu-card">
+                <div class="edu-degree">Master of Technology</div>
+                <div class="edu-school">VIT University, Vellore</div>
             </div>
-            <div class="skills-grid">
-                <div class="skill-tag">Go</div>
-                <div class="skill-tag">Java</div>
-                <div class="skill-tag">Kotlin</div>
-                <div class="skill-tag">Kafka</div>
-                <div class="skill-tag">KStream</div>
-                <div class="skill-tag">Docker</div>
-                <div class="skill-tag">Kubernetes</div>
-                <div class="skill-tag">Spring Boot</div>
-                <div class="skill-tag">AWS</div>
-                <div class="skill-tag">PostgreSQL</div>
-                <div class="skill-tag">MySQL</div>
-                <div class="skill-tag">DDD</div>
-                <div class="skill-tag">Event Streaming</div>
+            <div class="edu-card">
+                <div class="edu-degree">Bachelor of Engineering</div>
+                <div class="edu-school">University of Pune, Pune</div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:bhushan.bhagwat.shinde@gmail.com">Email</a>
+            <a href="https://github.com/bhushanshinde" target="_blank">GitHub</a>
+        </div>
+        <div class="footer-copy">© 2026 Bhushan Shinde. Built with precision.</div>
+    </footer>
+
+    <!-- SCROLL REVEAL -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
